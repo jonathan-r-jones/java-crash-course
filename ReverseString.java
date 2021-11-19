@@ -1,7 +1,4 @@
-import java.io.*;
-import java.util.Scanner;
- 
-class ReverseString {
+ class ReverseString {
     public static void main (String[] args) {
        
         String str= "Geeks", nstr="";
