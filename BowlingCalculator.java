@@ -33,21 +33,11 @@ public class BowlingCalculator {
     currentFrameIsASpare = false;
     if (firstBall == 10) {
       currentFrameIsAStrike = true;
-    } else if (firstBall + secondBall == 10) {
-      currentFrameIsASpare = true;
-    }
-    if (firstBall + secondBall == 10) {
-      if (previousFrameWasASpare) {
-        totalScore += firstBall;
-      }
       if (previousFrameWasAStrike) {
         totalScore += firstBall + secondBall;
       }
-      totalScore += firstBall + secondBall;
-      displayScore = -1;
-      previousFrameWasASpare = currentFrameIsASpare;
-      previousFrameWasAStrike = currentFrameIsAStrike;
-      return displayScore;
+    } else if (firstBall + secondBall == 10) {
+      currentFrameIsASpare = true;
     }
     if (previousFrameWasASpare) {
       totalScore += firstBall;
@@ -55,8 +45,19 @@ public class BowlingCalculator {
     if (previousFrameWasAStrike) {
       totalScore += firstBall + secondBall;
     }
+    previousFrameWasASpare = currentFrameIsASpare;
+    previousFrameWasAStrike = currentFrameIsAStrike;
     totalScore += firstBall + secondBall;
-    return totalScore;
+    if (firstBall + secondBall == 10) {
+      return toBeDeterminedScore; // -1
+    } else {
+      printFrame(frameNumber, totalScore);
+      return totalScore;
+    }
+  }
+
+  public void printFrame(int frameNumber, int totalScore) {
+    System.out.println("Frame " + frameNumber + ": " + totalScore);
   }
 
 }
