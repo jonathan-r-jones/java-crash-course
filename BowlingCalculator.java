@@ -1,3 +1,5 @@
+import java.lang.reflect.Constructor;
+
 public class BowlingCalculator {
   
   boolean currentFrameIsASpare;
@@ -5,6 +7,7 @@ public class BowlingCalculator {
   boolean previousFrameWasASpare;
   boolean previousFrameWasAStrike;
 
+  int consecutiveStrikeCounter;
   int displayScore;
   int toBeDeterminedScore = -1;
   int totalScore;
@@ -20,6 +23,10 @@ public class BowlingCalculator {
     game.score();
   }
 
+  public BowlingCalculator() {
+    System.out.println("\nNew Game *********************** ");
+  }
+
   int score() {
     return totalScore;
   }
@@ -28,34 +35,48 @@ public class BowlingCalculator {
     return displayScore;
   }
 
-  public int frame(int frameNumber, int firstBall, int secondBall) {
+  public void frame(int frameNumber, int firstBall, int secondBall) {
     currentFrameIsAStrike = false;
     currentFrameIsASpare = false;
+    totalScore += firstBall + secondBall;
     if (firstBall == 10) {
+      consecutiveStrikeCounter++;
       currentFrameIsAStrike = true;
-      if (previousFrameWasAStrike) {
-        totalScore += firstBall + secondBall;
-      }
     } else if (firstBall + secondBall == 10) {
+      consecutiveStrikeCounter = 0;
       currentFrameIsASpare = true;
+    }
+    // These statements need to appear before the beginning of the return statements.
+    previousFrameWasASpare = currentFrameIsASpare;
+    previousFrameWasAStrike = currentFrameIsAStrike;
+    // Simplest case; no marks to account for.
+    if (!previousFrameWasASpare && !previousFrameWasAStrike && (firstBall + secondBall != 10)){
+      printFrame(frameNumber, totalScore);
+      return;
     }
     if (previousFrameWasASpare) {
       totalScore += firstBall;
       printFrame(frameNumber - 1, totalScore);
+      return;
     }
-    if (previousFrameWasAStrike) {
-      totalScore += firstBall + secondBall;
+    if (previousFrameWasAStrike && (firstBall + secondBall != 10)) {
+      printFrame(frameNumber - 1, totalScore);
+      return;
     }
-    previousFrameWasASpare = currentFrameIsASpare;
-    previousFrameWasAStrike = currentFrameIsAStrike;
+
+/*     if (previousFrameWasAStrike && firstBall != 10) {
+    }
+    if (consecutiveStrikeCounter < 2) {
+      printFrame(frameNumber - 1, totalScore);
+    } else if (consecutiveStrikeCounter == 3) {
+      printFrame(frameNumber - 2, totalScore);
+    }
     totalScore += firstBall + secondBall;
-    if (firstBall + secondBall == 10) {
-      return toBeDeterminedScore; // -1
-    } else {
+    if (firstBall + secondBall != 10) {
       printFrame(frameNumber, totalScore);
-      return totalScore;
+      return;
     }
-  }
+ */  }
 
   public void printFrame(int frameNumber, int totalScore) {
     System.out.println("Frame " + frameNumber + ": " + totalScore);
