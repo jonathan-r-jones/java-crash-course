@@ -41,6 +41,7 @@ public class BowlingCalculator {
     }
     if (previousFrameWasASpare) {
       totalScore += firstBall;
+      printFrame(frameNumber - 1, totalScore);
     }
     if (previousFrameWasAStrike) {
       totalScore += firstBall + secondBall;
