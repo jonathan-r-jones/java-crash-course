@@ -44,8 +44,8 @@ public class BowlingCalculatorTest {
 
   @Test
   void strikeInFirstFrame() {
-    game.frame(1, 10, 0);
-    game.frame(2, 3, 4);
+    game.frame(1, 10, 0); // 17
+    game.frame(2, 3, 4); // 24
     assertEquals(24, game.score());
   }
 
@@ -70,10 +70,19 @@ public class BowlingCalculatorTest {
 
   @Test
   void doubleStrike() {
-    game.frame(1, 10, 0);
-    game.frame(2, 10, 0);
-    game.frame(3, 9, 0);
+    game.frame(1, 10, 0); // 29
+    game.frame(2, 10, 0); // 48
+    game.frame(3, 9, 0); // 57
     assertEquals(57, game.score());
+  }
+
+  @Test
+  void turkey() {
+    game.frame(1, 10, 0); // 30
+    game.frame(2, 10, 0); // 59
+    game.frame(3, 10, 0); // 78
+    game.frame(4, 9, 0); // 87
+    assertEquals(87, game.score());
   }
 
 }

@@ -36,13 +36,33 @@ public class BowlingCalculator {
   }
 
   public void frame(int frameNumber, int firstBall, int secondBall) {
-    currentFrameIsAStrike = false;
     currentFrameIsASpare = false;
+    currentFrameIsAStrike = false;
     totalScore += firstBall + secondBall;
+    if (previousFrameWasAStrike && (firstBall + secondBall != 10)) {
+      if (consecutiveStrikeCounter == 2) {
+        printFrame(frameNumber - 2, totalScore);
+        totalScore += 10;
+        totalScore += firstBall + secondBall;
+        printFrame(frameNumber - 1, totalScore);
+      }
+      if (consecutiveStrikeCounter == 3) {
+        totalScore += 20;
+        printFrame(frameNumber - 2, totalScore);
+        totalScore += 10;
+        totalScore += firstBall + secondBall;
+        printFrame(frameNumber - 1, totalScore);
+      }
+      totalScore += firstBall + secondBall;
+      printFrame(frameNumber, totalScore);
+    }
     if (firstBall == 10) {
       consecutiveStrikeCounter++;
       currentFrameIsAStrike = true;
-    } else if (firstBall + secondBall == 10) {
+    } else {
+      consecutiveStrikeCounter = 0;
+    }
+    if (firstBall != 10 && (firstBall + secondBall == 10)) {
       currentFrameIsASpare = true;
     }
     // Simplest case; no marks to account for.
@@ -53,35 +73,12 @@ public class BowlingCalculator {
       totalScore += firstBall;
       printFrame(frameNumber - 1, totalScore);
     }
-    if (previousFrameWasAStrike && (firstBall + secondBall != 10)) {
-      printFrame(frameNumber - 1, totalScore);
-      totalScore += firstBall + secondBall;
-      printFrame(frameNumber, totalScore);
+    if (consecutiveStrikeCounter == 3) {
+      printFrame(frameNumber - 2, totalScore);
     }
     previousFrameWasASpare = currentFrameIsASpare;
     previousFrameWasAStrike = currentFrameIsAStrike;
-    if (firstBall != 10) {
-      consecutiveStrikeCounter = 0;
-    }
-    if ((consecutiveStrikeCounter == 2) && (firstBall + secondBall != 10)) {
-      // printFrame(frameNumber - 2, totalScore);
-      // totalScore += firstBall + secondBall;
-      // printFrame(frameNumber, totalScore);
-    }
-
-/*     if (previousFrameWasAStrike && firstBall != 10) {
-    }
-    if (consecutiveStrikeCounter < 2) {
-      printFrame(frameNumber - 1, totalScore);
-    } else if (consecutiveStrikeCounter == 3) {
-      printFrame(frameNumber - 2, totalScore);
-    }
-    totalScore += firstBall + secondBall;
-    if (firstBall + secondBall != 10) {
-      printFrame(frameNumber, totalScore);
-      return;
-    }
- */  }
+  }
 
   public void printFrame(int frameNumber, int totalScore) {
     System.out.println("Frame " + frameNumber + ": " + totalScore);
