@@ -14,23 +14,10 @@ public class BowlingCalculatorTest2 {
   }
 
   @Test
-  void gameScoreIsZero(TestInfo testInfo) {
-    System.out.println("\n* " + testInfo.getDisplayName());
-    assertEquals(0, game.score());
-  }
-
-  @Test
-  void easyAs1(TestInfo testInfo) {
-    System.out.println("\n* " + testInfo.getDisplayName());
-    game.frame(1, 1, 0);
-    assertEquals(1, game.score());
-  }
-
-  @Test
   void easyAs2(TestInfo testInfo) {
     System.out.println("\n* " + testInfo.getDisplayName());
-    game.frame(1, 2, 0);
-    assertEquals(2, game.score());
+    game.frame(1, 1, 0);
+    assertEquals(1, game.score(1));
   }
 
   @Test
@@ -38,7 +25,7 @@ public class BowlingCalculatorTest2 {
     System.out.println("\n* " + testInfo.getDisplayName());
     game.frame(1, 1, 0);
     game.frame(2, 2, 0);
-    assertEquals(3, game.score());
+    assertEquals(3, game.score(2));
   }
 
   @Test
@@ -47,7 +34,7 @@ public class BowlingCalculatorTest2 {
     game.frame(1, 1, 0);
     game.frame(2, 2, 0);
     game.frame(3, 3, 0);
-    assertEquals(6, game.score());
+    assertEquals(6, game.score(3));
   }
 
   @Test
@@ -57,7 +44,7 @@ public class BowlingCalculatorTest2 {
     game.frame(2, 3, 4);
     game.frame(3, 5, 4);
     game.frame(4, 7, 2);
-    assertEquals(27, game.score());
+    assertEquals(27, game.score(4));
   }
 
   @Test
@@ -65,7 +52,8 @@ public class BowlingCalculatorTest2 {
     System.out.println("\n* " + testInfo.getDisplayName());
     game.frame(1, 1, 9);
     game.frame(2, 1, 0);
-    assertEquals(12, game.score());
+    game.printScores();
+    assertEquals(12, game.score(2));
   }
 
 }

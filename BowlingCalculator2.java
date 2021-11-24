@@ -6,7 +6,6 @@ public class BowlingCalculator2 {
   boolean previousFrameWasAStrike;
 
   int consecutiveStrikeCounter;
-  int totalScore;
   int column = 5;
   int row = 11;
   int[][] scores = new int[row][column];
@@ -17,18 +16,24 @@ public class BowlingCalculator2 {
     game.printScores();
   }
 
-  int score() {
-    return totalScore;
+  int score(int framesBowled) {
+    return scores[framesBowled][4];
   }
 
   public void frame(int frameNumber, int firstBall, int secondBall) {
     currentFrameIsASpare = false;
     currentFrameIsAStrike = false;
-    totalScore += firstBall + secondBall;
+    int frameBallTotal = firstBall + secondBall;
+    if ((scores[frameNumber - 1][2] + scores[frameNumber - 1][3] == 10) && (scores[frameNumber - 1][2] != 10)) {
+      previousFrameWasASpare = true;
+    }
     scores[frameNumber][1] = frameNumber;
     scores[frameNumber][2] = firstBall;
     scores[frameNumber][3] = secondBall;
-    scores[frameNumber][4] = totalScore;
+    if (previousFrameWasASpare) {
+      scores[frameNumber - 1][4] += firstBall;
+    }
+    scores[frameNumber][4] = scores[frameNumber - 1][4] + frameBallTotal;
   }
 
   public void printFrame(int frameNumber) {
