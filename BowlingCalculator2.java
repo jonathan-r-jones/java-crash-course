@@ -1,7 +1,5 @@
 public class BowlingCalculator2 {
   
-  boolean currentFrameIsASpare;
-  boolean currentFrameIsAStrike;
   boolean previousFrameWasASpare;
   boolean previousFrameWasAStrike;
 
@@ -21,24 +19,27 @@ public class BowlingCalculator2 {
   }
 
   public void frame(int frameNumber, int firstBall, int secondBall) {
-    currentFrameIsASpare = false;
-    currentFrameIsAStrike = false;
     int frameBallTotal = firstBall + secondBall;
-    if ((scores[frameNumber - 1][2] + scores[frameNumber - 1][3] == 10) && (scores[frameNumber - 1][2] != 10)) {
-      previousFrameWasASpare = true;
-    }
-    if (scores[frameNumber - 1][2] == 10) {
-      previousFrameWasAStrike = true;
-    }
+
     scores[frameNumber][1] = frameNumber;
     scores[frameNumber][2] = firstBall;
     scores[frameNumber][3] = secondBall;
-    if (previousFrameWasASpare) {
+
+    // Previous 2 frames were strikes.
+    if (scores[frameNumber - 1][2] == 10 && scores[frameNumber - 2][2] == 10) {
+      scores[frameNumber - 2][4] += frameBallTotal;
+    }
+
+    // Previous frame was a spare.
+    if ((scores[frameNumber - 1][2] + scores[frameNumber - 1][3] == 10) && (scores[frameNumber - 1][2] != 10)) {
       scores[frameNumber - 1][4] += firstBall;
     }
-    if (previousFrameWasAStrike) {
+
+    // Previous frame was a strike.
+    if (scores[frameNumber - 1][2] == 10) {
       scores[frameNumber - 1][4] += frameBallTotal;
     }
+
     scores[frameNumber][4] = scores[frameNumber - 1][4] + frameBallTotal;
   }
 
