@@ -14,6 +14,7 @@ public class BowlingCalculator2 {
   public static void main(String[] args) {
     BowlingCalculator2 game = new BowlingCalculator2();
     game.frame(1, 1, 0); // 1
+    game.printScores();
   }
 
   int score() {
@@ -28,12 +29,21 @@ public class BowlingCalculator2 {
     scores[frameNumber][2] = firstBall;
     scores[frameNumber][3] = secondBall;
     scores[frameNumber][4] = totalScore;
-    printFrame(frameNumber);
   }
 
   public void printFrame(int frameNumber) {
     String markSymbol = "-";
-    System.out.println("Frame " + frameNumber + ": " + markSymbol + ' ' + scores[frameNumber][2] + ", " + scores[frameNumber][3] + " = " + scores[frameNumber][4]);
+    if ((scores[frameNumber][2] + scores[frameNumber][3] == 10) && (scores[frameNumber][2] != 10)) {
+      markSymbol = "/";
+    }
+    System.out.println("Frame " + frameNumber + ": " + markSymbol + ' ' + scores[frameNumber][2] + ", "
+        + scores[frameNumber][3] + " = " + scores[frameNumber][4]);
+  }
+
+  public void printScores() {
+    for (int i = 1; i <= 10; i++) {
+      printFrame(i);
+    }
   }
 
 }

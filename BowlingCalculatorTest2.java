@@ -60,4 +60,12 @@ public class BowlingCalculatorTest2 {
     assertEquals(27, game.score());
   }
 
+  @Test
+  void firstFrameSpare(TestInfo testInfo) {
+    System.out.println("\n* " + testInfo.getDisplayName());
+    game.frame(1, 1, 9);
+    game.frame(2, 1, 0);
+    assertEquals(12, game.score());
+  }
+
 }
