@@ -79,10 +79,10 @@ public class BowlingCalculatorTest2 {
   void twoStrikes(TestInfo testInfo) {
     System.out.println("\n* " + testInfo.getDisplayName());
     game.frame(1, 10, 0); // 29
-    game.frame(2, 10, 0); // 45
-    game.frame(3, 6, 3); // 54
+    game.frame(2, 10, 0); // 48
+    game.frame(3, 6, 3); // 57
     game.printScores();
-    assertEquals(54, game.score(3));
+    assertEquals(57, game.score(3));
   }
 
 }

@@ -28,6 +28,7 @@ public class BowlingCalculator2 {
     // Previous 2 frames were strikes.
     if (scores[frameNumber - 1][2] == 10 && scores[frameNumber - 2][2] == 10) {
       scores[frameNumber - 2][4] += frameBallTotal;
+      scores[frameNumber - 1][4] += frameBallTotal;
     }
 
     // Previous frame was a spare.
