@@ -120,4 +120,38 @@ public class BowlingCalculatorTest2 {
     assertEquals(54, game.score(5));
   }
 
+  @Test
+  void nineStrikes(TestInfo testInfo) {
+    System.out.println("\n* " + testInfo.getDisplayName());
+    game.frame(1, 10, 0); // 30
+    game.frame(2, 10, 0); // 60
+    game.frame(3, 10, 0); // 90
+    game.frame(4, 10, 0); // 120
+    game.frame(5, 10, 0); // 150
+    game.frame(6, 10, 0); // 180
+    game.frame(7, 10, 0); // 210
+    game.frame(8, 10, 0); // 239
+    game.frame(9, 10, 0); // 258
+    game.frame(10, 9, 0); // 267
+    game.printScores();
+    assertEquals(267, game.score(10));
+  }
+
+  @Test
+  void perfectGame(TestInfo testInfo) {
+    System.out.println("\n* " + testInfo.getDisplayName());
+    game.frame(1, 10, 0); // 30
+    game.frame(2, 10, 0); // 60
+    game.frame(3, 10, 0); // 90
+    game.frame(4, 10, 0); // 120
+    game.frame(5, 10, 0); // 150
+    game.frame(6, 10, 0); // 180
+    game.frame(7, 10, 0); // 210
+    game.frame(8, 10, 0); // 240
+    game.frame(9, 10, 0); // 270
+    game.tenthFrame(10, 0, 0, 0); // 300
+    game.printScores();
+    assertEquals(300, game.score(10));
+  }
+
 }

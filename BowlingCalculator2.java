@@ -41,6 +41,44 @@ public class BowlingCalculator2 {
       scores[frameNumber - 1][4] += frameBallTotal;
     }
 
+    // Tenth frame special case.
+    if (frameNumber == 10) {
+      // scores[frameNumber - 1][4] += frameBallTotal;
+      // scores[frameNumber - 1][4] += frameBallTotal;
+    }
+
+    scores[frameNumber][4] = scores[frameNumber - 1][4] + frameBallTotal;
+  }
+
+  public void tenthFrame(int frameNumber, int firstBall, int secondBall, int thirdBall) {
+    int frameBallTotal = firstBall + secondBall + thirdBall;
+
+    scores[frameNumber][1] = frameNumber;
+    scores[frameNumber][2] = firstBall;
+    scores[frameNumber][3] = secondBall;
+
+    // Previous 2 frames were strikes.
+    if (scores[frameNumber - 1][2] == 10 && scores[frameNumber - 2][2] == 10) {
+      scores[frameNumber - 2][4] += frameBallTotal;
+      scores[frameNumber - 1][4] += frameBallTotal;
+    }
+
+    // Previous frame was a spare.
+    if ((scores[frameNumber - 1][2] + scores[frameNumber - 1][3] == 10) && (scores[frameNumber - 1][2] != 10)) {
+      scores[frameNumber - 1][4] += firstBall;
+    }
+
+    // Previous frame was a strike.
+    if (scores[frameNumber - 1][2] == 10) {
+      scores[frameNumber - 1][4] += frameBallTotal;
+    }
+
+    // Tenth frame special case.
+    if (frameNumber == 10) {
+      // scores[frameNumber - 1][4] += frameBallTotal;
+      // scores[frameNumber - 1][4] += frameBallTotal;
+    }
+
     scores[frameNumber][4] = scores[frameNumber - 1][4] + frameBallTotal;
   }
 
