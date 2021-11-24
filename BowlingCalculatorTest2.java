@@ -85,4 +85,39 @@ public class BowlingCalculatorTest2 {
     assertEquals(57, game.score(3));
   }
 
+  @Test
+  void threeStrikes(TestInfo testInfo) {
+    System.out.println("\n* " + testInfo.getDisplayName());
+    game.frame(1, 10, 0); // 30
+    game.frame(2, 10, 0); // 58
+    game.frame(3, 10, 0); // 76
+    game.frame(4, 8, 0); // 84
+    game.printScores();
+    assertEquals(84, game.score(4));
+  }
+
+  @Test
+  void fourStrikes(TestInfo testInfo) {
+    System.out.println("\n* " + testInfo.getDisplayName());
+    game.frame(1, 10, 0); // 30
+    game.frame(2, 10, 0); // 60
+    game.frame(3, 10, 0); // 87
+    game.frame(4, 10, 0); // 104
+    game.frame(5, 7, 0); // 111
+    game.printScores();
+    assertEquals(111, game.score(5));
+  }
+
+  @Test
+  void gutterStrikes(TestInfo testInfo) {
+    System.out.println("\n* " + testInfo.getDisplayName());
+    game.frame(1, 10, 0); // 20
+    game.frame(2, 10, 0); // 30
+    game.frame(3, 0, 0); // 30
+    game.frame(4, 10, 0); // 47
+    game.frame(5, 7, 0); // 54
+    game.printScores();
+    assertEquals(54, game.score(5));
+  }
+
 }
