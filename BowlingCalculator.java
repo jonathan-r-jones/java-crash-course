@@ -20,7 +20,7 @@ public class BowlingCalculator {
   }
 
   public BowlingCalculator() {
-    System.out.println("\nNew Game *********************** ");
+    //System.out.println("Constructor reached.");
   }
 
   int score() {
@@ -66,8 +66,9 @@ public class BowlingCalculator {
       printFrame(frameNumber - 1, totalScore);
       totalScore += firstBall;
     }
-    if (consecutiveStrikeCounter == 3) {
+    if (consecutiveStrikeCounter >= 3) {
       printFrame(frameNumber - 2, totalScore);
+      //totalScore += 20;
     }
     previousFrameWasASpare = currentFrameIsASpare;
     previousFrameWasAStrike = currentFrameIsAStrike;
