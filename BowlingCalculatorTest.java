@@ -51,20 +51,17 @@ public class BowlingCalculatorTest {
 
   @Test
   void strikeSecondFrame() {
-    game.frame(1, 9, 0);
-    game.frame(2, 10, 0);
-    game.frame(2, 3, 4);
-    assertEquals(33, game.score());
+    game.frame(1, 9, 0); // 9
+    game.frame(2, 10, 0); // 27
+    game.frame(3, 7, 1); // 35
+    assertEquals(35, game.score());
   }
 
   @Test
   void spareThenStrike() {
-    game.frame(1, 9, 1);
-    //System.out.println("Score 1: " + game.score());
+    game.frame(1, 9, 1); // 20
     game.frame(2, 10, 0);
-    //System.out.println("Score 2: " + game.score());
     game.frame(3, 3, 4);
-    //System.out.println("Score 3: " + game.score());
     assertEquals(44, game.score());
   }
 
