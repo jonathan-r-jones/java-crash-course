@@ -27,11 +27,17 @@ public class BowlingCalculator2 {
     if ((scores[frameNumber - 1][2] + scores[frameNumber - 1][3] == 10) && (scores[frameNumber - 1][2] != 10)) {
       previousFrameWasASpare = true;
     }
+    if (scores[frameNumber - 1][2] == 10) {
+      previousFrameWasAStrike = true;
+    }
     scores[frameNumber][1] = frameNumber;
     scores[frameNumber][2] = firstBall;
     scores[frameNumber][3] = secondBall;
     if (previousFrameWasASpare) {
       scores[frameNumber - 1][4] += firstBall;
+    }
+    if (previousFrameWasAStrike) {
+      scores[frameNumber - 1][4] += frameBallTotal;
     }
     scores[frameNumber][4] = scores[frameNumber - 1][4] + frameBallTotal;
   }
@@ -40,6 +46,9 @@ public class BowlingCalculator2 {
     String markSymbol = "-";
     if ((scores[frameNumber][2] + scores[frameNumber][3] == 10) && (scores[frameNumber][2] != 10)) {
       markSymbol = "/";
+    }
+    if (scores[frameNumber][2] == 10) {
+      markSymbol = "x";
     }
     System.out.println("Frame " + frameNumber + ": " + markSymbol + ' ' + scores[frameNumber][2] + ", "
         + scores[frameNumber][3] + " = " + scores[frameNumber][4]);
