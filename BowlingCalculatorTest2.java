@@ -208,7 +208,7 @@ public class BowlingCalculatorTest2 {
   @Test
   void oneSixtyNine(TestInfo testInfo) {
     System.out.println("\n* " + testInfo.getDisplayName());
-    String input = "9/-/XX627/8/X9-9/9";
+    //String input = "9/-/XX627/8/X9-9/9";
     game.frame(1, 9, 1); // 10
     game.frame(2, 0, 10); // 30
     game.frame(3, 10, 0); // 58
